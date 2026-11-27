@@ -224,6 +224,25 @@ class TestStatusOnUpdate:
         assert body["status"] == "in_progress"
         assert body["completed"] is False
 
+    @pytest.mark.parametrize("start", ["todo", "in_progress"])
+    def test_completed_true_sets_status_done(self, client, start):
+        todo = self._create(client, status=start)
+        body = self._put(client, todo, completed=True).get_json()
+        assert body["completed"] is True
+        assert body["status"] == "done"
+        item = client.get("/api/todos").get_json()[0]
+        assert item["completed"] is True
+        assert item["status"] == "done"
+
+    def test_completed_false_on_done_resets_status_to_todo(self, client):
+        todo = self._create(client, status="done")
+        body = self._put(client, todo, completed=False).get_json()
+        assert body["completed"] is False
+        assert body["status"] == "todo"
+        item = client.get("/api/todos").get_json()[0]
+        assert item["completed"] is False
+        assert item["status"] == "todo"
+
     def test_title_only_update_keeps_done_state(self, client):
         todo = self._create(client, status="done")
         body = self._put(client, todo, title="Renamed").get_json()

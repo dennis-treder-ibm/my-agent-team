@@ -130,6 +130,10 @@ def update_todo(todo_id):
             fields["completed"] = 1 if data["status"] == "done" else 0
         elif "completed" in data:
             fields["completed"] = 1 if data["completed"] else 0
+            if data["completed"]:
+                fields["status"] = "done"
+            elif existing["status"] == "done":
+                fields["status"] = "todo"
 
         if fields:
             set_clause = ", ".join(f"{k} = ?" for k in fields)
