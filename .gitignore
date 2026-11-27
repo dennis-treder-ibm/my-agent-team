@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[oc]
+*.egg-info
+.venv/
+build/
+dist/
+wheels/
+.env
+ 
+# Database
+*.db
+*.sqlite
+
+# Node / Frontend
+node_modules/
+todo-app/frontend/dist/
+todo-app/frontend/dist-ssr/
+*.local
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Bob — commit the agent config (modes, skills, rules), keep the rest local.
+# Note: ".bob/*" (not ".bob/") so the "!" exceptions below can take effect.
+# mcp.json stays ignored: it points to a local, machine-specific MCP server.
+.bob/*
+!.bob/custom_modes.yaml
+!.bob/skills/
+!.bob/rules/
+
+# Test cache
+.pytest_cache/
+
+# Bob task files
+bob-task*.json
+
+# Bug report drafts written by the Orchestrator (local only)
+bug-reports/
+
+# Local presentation material and recordings (not part of the workshop repo)
+*.pptx
+.videos/
